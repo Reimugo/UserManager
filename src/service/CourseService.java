@@ -74,4 +74,12 @@ public class CourseService {
         return CourseRepository.getInstance().getCoursesByCreator(creator);
     }
 
+    /**根据课程名获取一个已开设的课程Course对象
+     * @param courseName 开课者的User对象
+     * @return 课程名对应的Course对象
+     * */
+    public Course getCourseByName(String courseName){
+        return CourseRepository.getInstance().getCourseByName(courseName);
+    }
+
 }

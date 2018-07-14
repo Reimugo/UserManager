@@ -38,4 +38,12 @@ public class CourseRepository {
         return list;
     }
 
+    public Course getCourseByName(String courseName){
+        for(Course course : courseList){
+            if(course.getName().equals(courseName))
+                return course;
+        }
+        return null;
+    }
+
 }
