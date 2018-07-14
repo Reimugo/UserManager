@@ -1,0 +1,5 @@
+*.class
+*.jar
+.DS_Store
+/out/
+/.idea/workspace.xml
