@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.Vector;
 
 public class CourseRepository {
+    private static final String DEFAULT_FILENAME = "course.dat";
+
     private List<Course> courseList;
 
+    @SuppressWarnings("unchecked")
     private CourseRepository(){
-        courseList = new Vector<>();
+        courseList = (List<Course>)DaoUtil.loadDataFromFile(DEFAULT_FILENAME);
+        if(courseList == null)
+            courseList = new Vector<>();
     }
 
     private static class SingletonFactory{
@@ -25,8 +30,18 @@ public class CourseRepository {
         return new Vector<>(courseList);
     }
 
+    public Course getCourseById(int id){
+        for(Course course : courseList){
+            if(course.getId() == id)
+                return course;
+        }
+        return null;
+    }
+
     public void addCourse(Course course){
         courseList.add(course);
+
+        DaoUtil.saveDataToFile(courseList, DEFAULT_FILENAME);
     }
 
     public List<Course> getCoursesByCreator(User creator){

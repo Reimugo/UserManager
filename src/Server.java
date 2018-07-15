@@ -1,3 +1,5 @@
+
+
 /**
  * 模型逻辑已经实现得差不多，可以根据提示实现客户端代码
  *
@@ -12,6 +14,5 @@
 
 public class Server {
     public static void main(String[] args) {
-
     }
 }

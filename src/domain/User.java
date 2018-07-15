@@ -1,18 +1,21 @@
 package domain;
 
+import dao.CourseRepository;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User {
+public class User implements Serializable {
     private String username;
     private String password;
-    private Set<Course> courses;
+    private Set<Integer> coursesId;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        courses = new HashSet<>();
+        coursesId = new HashSet<>();
     }
 
     public String getUsername() {
@@ -32,11 +35,18 @@ public class User {
     }
 
     public Set<Course> getCourses() {
-        return (new HashSet<>(courses));
+        Set<Course> courses = new HashSet<>();
+        for(int id : coursesId){
+            courses.add(CourseRepository.getInstance().getCourseById(id));
+        }
+        return courses;
     }
 
     public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+        coursesId.clear();
+        for(Course course : courses){
+            coursesId.add(course.getId());
+        }
     }
 
     @Override

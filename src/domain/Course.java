@@ -1,14 +1,33 @@
 package domain;
 
+import dao.UserRepository;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Course {
+public class Course implements Serializable {
+    private static int maxId = 0;
+
+    private int id;
     private String name;
-    private User creator;
+    private String creatorUsername;
 
     public Course(String name, User creator) {
+        this(++maxId, name, creator);
+    }
+
+    public Course(int id, String name, User creator) {
+        this.id = id;
         this.name = name;
-        this.creator = creator;
+        this.creatorUsername = creator.getUsername();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -20,11 +39,11 @@ public class Course {
     }
 
     public User getCreator() {
-        return creator;
+        return UserRepository.getInstance().getUserByUsername(creatorUsername);
     }
 
     public void setCreator(User creator) {
-        this.creator = creator;
+        this.creatorUsername = creator.getUsername();
     }
 
     @Override
@@ -32,13 +51,12 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(name, course.name) &&
-                Objects.equals(creator, course.creator);
+        return Objects.equals(creatorUsername, course.creatorUsername);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, creator);
+        return Objects.hash(creatorUsername);
     }
 }
