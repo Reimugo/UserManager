@@ -42,7 +42,7 @@ public class UserService {
      * @param password 密码
      * @return 成功返回true，失败返回false
      * */
-    public static boolean authorize(String username, String password){
+    public boolean authorize(String username, String password){
         User userMatch = UserRepository.getInstance().getUserByUsername(username);
         if(userMatch == null){
             return false;
