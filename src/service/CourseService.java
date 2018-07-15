@@ -42,11 +42,13 @@ public class CourseService {
     }
 
     /**选课
-     * @param user 选课者的User对象
+     * @param username 选课者的用户名
      * @param course 课程对象
      * @return 成功返回true，失败返回false（选课者和开课者重复）
      * */
-    public boolean selectCourse(User user, Course course){
+    public boolean selectCourse(String username, Course course){
+        User user = UserRepository.getInstance().getUserByUsername(username);
+
         if(course.getCreator().equals(user))
             return false;
 
@@ -58,20 +60,20 @@ public class CourseService {
     }
 
     /**获取一个用户已选择的课程
-     * @param user 选课者的User对象
+     * @param username 选课者的用户名
      * @return 已选课程的集合
      * */
-    public Set<Course> getSelectedCourse(User user){
-        return user.getCourses();
+    public Set<Course> getSelectedCourse(String username){
+        return UserRepository.getInstance().getUserByUsername(username).getCourses();
     }
 
 
     /**获取一个用户已开设的课程
-     * @param creator 开课者的User对象
+     * @param username 开课者的用户名
      * @return 已开设课程的集合
      * */
-    public List<Course> getCreatedCourse(User creator){
-        return CourseRepository.getInstance().getCoursesByCreator(creator);
+    public List<Course> getCreatedCourse(String username){
+        return CourseRepository.getInstance().getCoursesByCreator(UserRepository.getInstance().getUserByUsername(username));
     }
 
     /**根据课程名获取一个已开设的课程Course对象
