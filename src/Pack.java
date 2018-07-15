@@ -36,7 +36,7 @@ public class Pack implements Serializable {
         this.packType = packType;
     }
 
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 
