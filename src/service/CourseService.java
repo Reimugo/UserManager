@@ -82,4 +82,8 @@ public class CourseService {
         return CourseRepository.getInstance().getCourseByName(courseName);
     }
 
+    public Course getCourseById(int id){
+        return CourseRepository.getInstance().getCourseById(id);
+    }
+
 }
