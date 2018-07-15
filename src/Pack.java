@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  * packType - 表示此次发送的请求类型，如（开课/选课/登录/注册）等，详情请看枚举类型 PackType
  * result - 服务器返回此对象时，可用此字段表示是否成功
+ * message - 附带信息
  * user - 操作的用户
  * data - 附带数据，如User对象、Course对象以及Java集合等，若无附加数据则传递null即可
  *
@@ -15,6 +16,7 @@ import java.io.Serializable;
 public class Pack implements Serializable {
     private PackType packType;
     private boolean result;
+    private String message;
     private User operator;
     private Object data;
 
@@ -38,6 +40,14 @@ public class Pack implements Serializable {
 
     public void setResult(boolean result) {
         this.result = result;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public User getOperator() {
