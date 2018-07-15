@@ -43,11 +43,12 @@ public class CourseService {
 
     /**选课
      * @param username 选课者的用户名
-     * @param course 课程对象
+     * @param courseId 课程对象ID
      * @return 成功返回true，失败返回false（选课者和开课者重复）
      * */
-    public boolean selectCourse(String username, Course course){
+    public boolean selectCourse(String username, Integer courseId){
         User user = UserRepository.getInstance().getUserByUsername(username);
+        Course course = CourseRepository.getInstance().getCourseById(courseId);
 
         if(course.getCreator().equals(user))
             return false;
